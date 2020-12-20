@@ -36,13 +36,13 @@ class UNICHARSET;
 // the 64 bit EDGE_RECORD.
 using EDGE_INDEX = int64_t ;  // index of an edge in a given node
 using NODE_MARKER = bool *;
-using EDGE_VECTOR = GenericVector<EDGE_RECORD> ;
+using EDGE_VECTOR = tesseract::GenericVector<EDGE_RECORD> ;
 
 struct TRIE_NODE_RECORD {
   EDGE_VECTOR forward_edges;
   EDGE_VECTOR backward_edges;
 };
-using TRIE_NODES = GenericVector<TRIE_NODE_RECORD *> ;
+using TRIE_NODES = tesseract::GenericVector<TRIE_NODE_RECORD *> ;
 
 namespace tesseract {
 
@@ -88,7 +88,7 @@ class Trie : public Dawg {
     new_dawg_node();  // need to allocate node 0
     initialized_patterns_ = false;
   }
-  ~Trie() override { nodes_.delete_data_pointers(); }
+  ~Trie() override {}
 
   // Reset the Trie to empty.
   void clear();

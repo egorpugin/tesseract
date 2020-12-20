@@ -82,19 +82,19 @@ class PAGE_RES {                 // page result
   // the next word. This pointer is not owned by PAGE_RES class.
   WERD_CHOICE **prev_word_best_choice;
   // Sums of blame reasons computed by the blamer.
-  GenericVector<int> blame_reasons;
+  tesseract::GenericVector<int> blame_reasons;
   // Debug information about all the misadaptions on this page.
   // Each BlamerBundle contains an index into this vector, so that words that
   // caused misadaption could be marked. However, since words could be
   // deleted/split/merged, the log is stored on the PAGE_RES level.
-  GenericVector<STRING> misadaption_log;
+  tesseract::GenericVector<STRING> misadaption_log;
 
   inline void Init() {
     char_count = 0;
     rej_count = 0;
     rejected = false;
     prev_word_best_choice = nullptr;
-    blame_reasons.init_to_size(IRR_NUM_REASONS, 0);
+    blame_reasons.resize(IRR_NUM_REASONS, 0);
   }
 
   PAGE_RES() { Init(); }  // empty constructor
@@ -210,12 +210,12 @@ class WERD_RES : public ELIST_LINK {
   // The length of chopped_word matches length of seam_array + 1 (if set).
   TWERD* chopped_word = nullptr; // BLN chopped fragments output.
   // Vector of SEAM* holding chopping points matching chopped_word.
-  GenericVector<SEAM*> seam_array;
+  tesseract::GenericVector<SEAM*> seam_array;
   // Widths of blobs in chopped_word.
-  GenericVector<int> blob_widths;
+  tesseract::GenericVector<int> blob_widths;
   // Gaps between blobs in chopped_word. blob_gaps[i] is the gap between
   // blob i and blob i+1.
-  GenericVector<int> blob_gaps;
+  tesseract::GenericVector<int> blob_gaps;
   // Stores the lstm choices of every timestep
   std::vector<std::vector<std::pair<const char*, float>>> timesteps;
   // Stores the lstm choices of every timestep segmented by character
@@ -281,11 +281,11 @@ class WERD_RES : public ELIST_LINK {
   // rebuild_word. Each blob[i] in rebuild_word is composed of best_state[i]
   // adjacent blobs in chopped_word. The seams in seam_array are hidden
   // within a rebuild_word blob and revealed between them.
-  GenericVector<int> best_state;  // Number of blobs in each best blob.
+  tesseract::GenericVector<int> best_state;  // Number of blobs in each best blob.
   // The correct_text is used during training and adaption to carry the
   // text to the training system without the need for a unicharset. There
   // is one entry in the vector for each blob in rebuild_word and box_word.
-  GenericVector<STRING> correct_text;
+  tesseract::GenericVector<STRING> correct_text;
 
   // Less-well documented members.
   // TODO(rays) Add more documentation here.

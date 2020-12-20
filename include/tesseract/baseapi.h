@@ -37,11 +37,10 @@
 #include "publictypes.h"
 #include "resultiterator.h"
 #include "serialis.h"
+#include "strngs.h"
 #include "thresholder.h"
 #include "unichar.h"
 
-template <typename T>
-class GenericVector;
 class PAGE_RES;
 class PAGE_RES_IT;
 class ParagraphModel;
@@ -50,7 +49,6 @@ class BLOCK_LIST;
 class DENORM;
 class MATRIX;
 class ROW;
-class STRING;
 class WERD;
 struct Pix;
 struct Box;

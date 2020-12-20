@@ -44,7 +44,7 @@ struct DANGERR_INFO {
   UNICHAR_ID leftmost;   // in the replacement, what's the leftmost character?
 };
 
-using DANGERR = GenericVector<DANGERR_INFO>;
+using DANGERR = tesseract::GenericVector<DANGERR_INFO>;
 
 
 #endif

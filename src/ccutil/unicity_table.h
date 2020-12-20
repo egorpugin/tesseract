@@ -98,7 +98,7 @@ class UnicityTable {
   }
 
  private:
-  GenericVector<T> table_;
+  tesseract::GenericVector<T> table_;
   std::function<bool(const T&, const T&)> compare_cb_;
 };
 

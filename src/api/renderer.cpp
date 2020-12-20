@@ -19,12 +19,14 @@
 #include "config_auto.h"
 #endif
 
+#include <tesseract/renderer.h>
+
+#include <tesseract/baseapi.h>
+#include <tesseract/genericvector.h>
+
 #include <cstring>
 #include <memory>  // std::unique_ptr
 #include <string>  // std::string
-#include <tesseract/baseapi.h>
-#include <tesseract/genericvector.h>
-#include <tesseract/renderer.h>
 
 namespace tesseract {
 

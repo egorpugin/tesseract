@@ -19,13 +19,12 @@
 #ifndef SERIALIS_H
 #define SERIALIS_H
 
+#include "genericvector.h"
+
 #include <cstdint>  // uint8_t
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-
-template <typename T>
-class GenericVector;
 
 /***********************************************************************
   QUOTE_IT   MACRO DEFINITION

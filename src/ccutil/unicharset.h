@@ -471,7 +471,7 @@ class UNICHARSET {
   // Record normalized version of unichar with the given unichar_id.
   void set_normed(UNICHAR_ID unichar_id, const char* normed) {
     unichars[unichar_id].properties.normed = normed;
-    unichars[unichar_id].properties.normed_ids.truncate(0);
+    unichars[unichar_id].properties.normed_ids.resize(0);
   }
   // Sets the normed_ids vector from the normed string. normed_ids is not
   // stored in the file, and needs to be set when the UNICHARSET is loaded.
@@ -822,7 +822,7 @@ class UNICHARSET {
   // Returns a vector of UNICHAR_IDs that represent the ids of the normalized
   // version of the given id. There may be more than one UNICHAR_ID in the
   // vector if unichar_id represents a ligature.
-  const GenericVector<UNICHAR_ID>& normed_ids(UNICHAR_ID unichar_id) const {
+  const tesseract::GenericVector<UNICHAR_ID>& normed_ids(UNICHAR_ID unichar_id) const {
     return unichars[unichar_id].properties.normed_ids;
   }
 
@@ -950,7 +950,7 @@ class UNICHARSET {
     // A string of unichar_ids that represent the corresponding normed string.
     // For awkward characters like em-dash, this gives hyphen.
     // For ligatures, this gives the string of normal unichars.
-    GenericVector<UNICHAR_ID> normed_ids;
+    tesseract::GenericVector<UNICHAR_ID> normed_ids;
     STRING normed;  // normalized version of this unichar
     // Contains meta information about the fragment if a unichar represents
     // a fragment of a character, otherwise should be set to nullptr.

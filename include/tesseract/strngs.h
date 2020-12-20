@@ -23,33 +23,44 @@
 #include <cstdint>  // for uint32_t
 #include <cstdio>   // for FILE
 #include <cstring>  // for strncpy
+#include <string>
 
 #include "platform.h"  // for TESS_API
 
 namespace tesseract {
 class TFile;
-}  // namespace tesseract.
-
-// STRING_IS_PROTECTED means that  string[index] = X is invalid
-// because you have to go through strings interface to modify it.
-// This allows the string to ensure internal integrity and maintain
-// its own string length. Unfortunately this is not possible because
-// STRINGS are used as direct-manipulation data buffers for things
-// like length arrays and many places cast away the const on c_str()
-// to mutate the string. Turning this off means that internally we
-// cannot assume we know the strlen.
-#define STRING_IS_PROTECTED 0
 
 template <typename T>
 class GenericVector;
+}  // namespace tesseract.
 
-class TESS_API STRING {
+class STRING : public std::string {
+public:
+    using std::string::string;
+
+    inline char* strdup() const {
+        int32_t len = length() + 1;
+        return strncpy(new char[len], c_str(), len);
+    }
+
+    void split(char c, tesseract::GenericVector<STRING>* splited);
+
+    // Appends the given string and int (as a %d) to this.
+    // += cannot be used for ints as there as a char += operator that would
+    // be ambiguous, and ints usually need a string before or between them
+    // anyway.
+    void add_str_int(const char* str, int number);
+    // Appends the given string and double (as a %.8g) to this.
+    void add_str_double(const char* str, double number);
+};
+
+class TESS_API STRING_old {
  public:
-  STRING();
-  STRING(const STRING& string);
-  STRING(const char* string);
-  STRING(const char* data, int length);
-  ~STRING();
+  STRING_old();
+  STRING_old(const STRING_old& string);
+  STRING_old(const char* string);
+  STRING_old(const char* data, int length);
+  ~STRING_old();
 
   // Writes to the given file. Returns false in case of error.
   bool Serialize(FILE* fp) const;
@@ -82,30 +93,23 @@ class TESS_API STRING {
     return strncpy(new char[len], GetCStr(), len);
   }
 
-#if STRING_IS_PROTECTED
-  const char& operator[](int32_t index) const;
-  // len is number of chars in s to insert starting at index in this string
-  void insert_range(int32_t index, const char* s, int len);
-  void erase_range(int32_t index, int len);
-#else
   char& operator[](int32_t index) const;
-#endif
-  void split(char c, GenericVector<STRING>* splited);
+  //void split(char c, GenericVector_old<STRING_old>* splited);
   void truncate_at(int32_t index);
 
-  bool operator==(const STRING& string) const;
-  bool operator!=(const STRING& string) const;
+  bool operator==(const STRING_old& string) const;
+  bool operator!=(const STRING_old& string) const;
   bool operator!=(const char* string) const;
 
-  STRING& operator=(const char* string);
-  STRING& operator=(const STRING& string);
+  STRING_old& operator=(const char* string);
+  STRING_old& operator=(const STRING_old& string);
 
-  STRING operator+(const STRING& string) const;
-  STRING operator+(char ch) const;
+  STRING_old operator+(const STRING_old& string) const;
+  STRING_old operator+(char ch) const;
 
-  STRING& operator+=(const char* string);
-  STRING& operator+=(const STRING& string);
-  STRING& operator+=(char ch);
+  STRING_old& operator+=(const char* string);
+  STRING_old& operator+=(const STRING_old& string);
+  STRING_old& operator+=(char ch);
 
   // Assignment for strings which are not null-terminated.
   void assign(const char* cstr, int len);

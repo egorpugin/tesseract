@@ -28,14 +28,13 @@
 #include "ltrresultiterator.h"  // for LTRResultIterator
 #include "platform.h"           // for TESS_API, TESS_LOCAL
 #include "publictypes.h"        // for PageIteratorLevel
+#include "strngs.h"
 #include "unichar.h"            // for StrongScriptDirection
 
 template <typename T>
 class GenericVector;
 template <typename T>
 class GenericVectorEqEq;
-
-class STRING;
 
 namespace tesseract {
 

@@ -73,7 +73,7 @@ bool ReadAllBoxes(int target_page, bool skip_blanks, const char* filename,
                   GenericVector<STRING>* texts,
                   GenericVector<STRING>* box_texts,
                   GenericVector<int>* pages) {
-  GenericVector<char> box_data;
+  std::string box_data;
   if (!tesseract::LoadDataFromFile(BoxFileName(filename).c_str(), &box_data))
     return false;
   // Convert the array of bytes to a string, so it can be used by the parser.
@@ -86,12 +86,12 @@ bool ReadAllBoxes(int target_page, bool skip_blanks, const char* filename,
 // Reads all boxes from the string. Otherwise, as ReadAllBoxes.
 bool ReadMemBoxes(int target_page, bool skip_blanks, const char* box_data,
                   bool continue_on_failure,
-                  GenericVector<TBOX>* boxes,
-                  GenericVector<STRING>* texts,
-                  GenericVector<STRING>* box_texts,
-                  GenericVector<int>* pages) {
+                  tesseract::GenericVector<TBOX>* boxes,
+                  tesseract::GenericVector<STRING>* texts,
+                  tesseract::GenericVector<STRING>* box_texts,
+                  tesseract::GenericVector<int>* pages) {
   STRING box_str(box_data);
-  GenericVector<STRING> lines;
+  tesseract::GenericVector<STRING> lines;
   box_str.split('\n', &lines);
   if (lines.empty()) return false;
   int num_boxes = 0;

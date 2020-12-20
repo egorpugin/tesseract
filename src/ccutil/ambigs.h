@@ -140,11 +140,7 @@ using UnicharAmbigsVector = GenericVector<AmbigSpec_LIST *>;
 class UnicharAmbigs {
  public:
   UnicharAmbigs() = default;
-  ~UnicharAmbigs() {
-    replace_ambigs_.delete_data_pointers();
-    dang_ambigs_.delete_data_pointers();
-    one_to_one_definite_ambigs_.delete_data_pointers();
-  }
+  ~UnicharAmbigs() = default;
 
   const UnicharAmbigsVector &dang_ambigs() const { return dang_ambigs_; }
   const UnicharAmbigsVector &replace_ambigs() const { return replace_ambigs_; }

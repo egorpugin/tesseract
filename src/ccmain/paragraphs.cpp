@@ -17,13 +17,7 @@
  **********************************************************************/
 
 #include "paragraphs.h"
-#include <cctype>                 // for isspace
-#include <cmath>                  // for abs
-#include <cstdio>                 // for snprintf
-#include <cstdlib>                // for abs
-#include <cstring>                // for strchr, strlen
-#include <algorithm>              // for max
-#include <memory>                 // for unique_ptr
+
 #include <tesseract/genericvector.h>        // for GenericVector, GenericVectorEqEq
 #include <tesseract/helpers.h>              // for UpdateRange, ClipToRange
 #include "host.h"                 // for NearlyEqual
@@ -46,6 +40,14 @@
 #include "unicharset.h"           // for UNICHARSET
 #include "unicodes.h"             // for kPDF, kRLE
 #include "werd.h"                 // for WERD, W_REP_CHAR
+
+#include <cctype>                 // for isspace
+#include <cmath>                  // for abs
+#include <cstdio>                 // for snprintf
+#include <cstdlib>                // for abs
+#include <cstring>                // for strchr, strlen
+#include <algorithm>              // for max
+#include <memory>                 // for unique_ptr
 
 namespace tesseract {
 
@@ -119,7 +121,7 @@ static void PrintTable(const GenericVector<GenericVector<STRING> > &rows,
   GenericVector<STRING> col_width_patterns;
   for (int c = 0; c < max_col_widths.size(); c++) {
     col_width_patterns.push_back(
-        STRING("%-") + StrOf(max_col_widths[c]) + "s");
+        "%-" + StrOf(max_col_widths[c]) + "s");
   }
 
   for (int r = 0; r < rows.size(); r++) {

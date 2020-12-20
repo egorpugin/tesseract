@@ -92,10 +92,10 @@ class BLOB_CHOICE: public ELIST_LINK
       return fontinfo_id2_;
     }
   #ifndef DISABLED_LEGACY_ENGINE
-    const GenericVector<tesseract::ScoredFont>& fonts() const {
+    const tesseract::GenericVector<tesseract::ScoredFont>& fonts() const {
       return fonts_;
     }
-    void set_fonts(const GenericVector<tesseract::ScoredFont>& fonts) {
+    void set_fonts(const tesseract::GenericVector<tesseract::ScoredFont>& fonts) {
       fonts_ = fonts;
       int score1 = 0, score2 = 0;
       fontinfo_id_ = -1;
@@ -195,7 +195,7 @@ class BLOB_CHOICE: public ELIST_LINK
   UNICHAR_ID unichar_id_;          // unichar id
 #ifndef DISABLED_LEGACY_ENGINE
   // Fonts and scores. Allowed to be empty.
-  GenericVector<tesseract::ScoredFont> fonts_;
+  tesseract::GenericVector<tesseract::ScoredFont> fonts_;
 #endif  // ndef DISABLED_LEGACY_ENGINE
   int16_t fontinfo_id_;              // char font information
   int16_t fontinfo_id2_;             // 2nd choice font information
@@ -378,13 +378,13 @@ class WERD_CHOICE : public ELIST_LINK {
   /// Make more space in unichar_id_ and fragment_lengths_ arrays.
   inline void double_the_size() {
     if (reserved_ > 0) {
-      unichar_ids_ = GenericVector<UNICHAR_ID>::double_the_size_memcpy(
+      unichar_ids_ = tesseract::GenericVector<UNICHAR_ID>::double_the_size_memcpy(
           reserved_, unichar_ids_);
-      script_pos_ = GenericVector<tesseract::ScriptPos>::double_the_size_memcpy(
+      script_pos_ = tesseract::GenericVector<tesseract::ScriptPos>::double_the_size_memcpy(
           reserved_, script_pos_);
-      state_ = GenericVector<int>::double_the_size_memcpy(
+      state_ = tesseract::GenericVector<int>::double_the_size_memcpy(
           reserved_, state_);
-      certainties_ = GenericVector<float>::double_the_size_memcpy(
+      certainties_ = tesseract::GenericVector<float>::double_the_size_memcpy(
           reserved_, certainties_);
       reserved_ *= 2;
     } else {
